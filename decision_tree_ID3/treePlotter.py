@@ -11,7 +11,7 @@ def getNumLeafs(myTree):
     firstStr = myTree.keys()[0]
     secondDict = myTree[firstStr]
     for key in secondDict.keys():
-        if type(secondDict[key]).__name__ == 'dict': # test to see if the nodes are dictionaries, if not they are leaf nodes
+        if type(secondDict[key]).__name__ == 'dict':  # test to see if the nodes are dictionaries, if not they are leaf nodes
             numLeafs += getNumLeafs(secondDict[key])
         else:
             numLeafs += 1
@@ -23,13 +23,14 @@ def getTreeDepth(myTree):
     firstStr = myTree.keys()[0]
     secondDict = myTree[firstStr]
     for key in secondDict.keys():
-        if type(secondDict[key]).__name__ == 'dict': # test to see if the nodes are dictionaries, if not they are leaf nodes
+        if type(secondDict[key]).__name__ == 'dict':  # test to see if the nodes are dictionaries, if not they are leaf nodes
             thisDepth = 1 + getTreeDepth(secondDict[key])
         else:
             thisDepth = 1
         if thisDepth > maxDepth:
             maxDepth = thisDepth
     return maxDepth
+
 
 # 返回预定义的树结构
 def retrieveTree(i):
@@ -60,8 +61,8 @@ def plotTree(myTree, parentPt, nodeTxt):    # if the first key tells you what fe
     secondDict = myTree[firstStr]
     plotTree.yOff = plotTree.yOff - 1.0/plotTree.totalD
     for key in secondDict.keys():
-        if type(secondDict[key]).__name__ == 'dict':    # test to see if the nodes are dictonaires, if not they are leaf nodes
-            plotTree(secondDict[key],cntrPt,str(key))        # recursion
+        if type(secondDict[key]).__name__ == 'dict':      # test to see if the nodes are dictonaires, if not they are leaf nodes
+            plotTree(secondDict[key], cntrPt, str(key))        # recursion
         else:   # it's a leaf node print the leaf node
             plotTree.xOff = plotTree.xOff + 1.0/plotTree.totalW
             plotNode(secondDict[key], (plotTree.xOff, plotTree.yOff), cntrPt, leafNode)

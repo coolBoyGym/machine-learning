@@ -77,7 +77,7 @@ def majorityCnt(classList):
 def createTree(dataSet, labels):
     classList = [example[-1] for example in dataSet]
     if classList.count(classList[0]) == len(classList):
-        return classList[0]  # stop splitting when all of the classes are equal
+        return classList[0]   # stop splitting when all of the classes are equal
     if len(dataSet[0]) == 1:  # stop splitting when there are no more features in dataSet
         return majorityCnt(classList)
     bestFeat = chooseBestFeatureToSplit(dataSet)
@@ -90,6 +90,34 @@ def createTree(dataSet, labels):
         subLabels = labels[:]  # copy all of labels, so trees don't mess up existing labels
         myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value), subLabels)
     return myTree  # myTree是保存了整棵树信息的嵌套的字典
+
+
+# 使用决策树的分类函数
+def classify(inputTree, featLabels, testVec):
+    # print featLabels
+    firstStr = inputTree.keys()[0]
+    secondDict = inputTree[firstStr]
+    featIndex = featLabels.index(firstStr)
+    key = testVec[featIndex]
+    valueOfFeat = secondDict[key]
+    if isinstance(valueOfFeat, dict):
+        classLabel = classify(valueOfFeat, featLabels, testVec)
+    else:
+        classLabel = valueOfFeat
+    return classLabel
+
+
+# 使用pickle模块存储决策树
+def store_tree(inputTree, filename):
+    import pickle
+    fw = open(filename, 'w')
+    pickle.dump(inputTree, fw)
+    fw.close()
+
+def grab_tree(filename):
+    import pickle
+    fr = open(filename)
+    return pickle.load(fr)
 
 
 if __name__ == '__main__':
