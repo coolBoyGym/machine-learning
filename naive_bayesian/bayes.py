@@ -83,6 +83,7 @@ def testingNB():
     thisDoc = array(setOfWords2Vec(myVocabList, testEntry))
     print testEntry, 'classified as:', classifyNB(thisDoc, p0V, p1V, pAb)
 
+
 # 将一段字符串转化为小写字符列表
 def textParse(bigString):    # input is big string, output is word list
     import re
