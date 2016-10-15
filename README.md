@@ -1,2 +1,2 @@
 # machine-learning
-Examples of machine learning algorithms.
+Examples of some machine learning algorithms.
