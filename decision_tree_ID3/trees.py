@@ -2,7 +2,6 @@
 from math import log
 import operator
 
-
 # 对于给定的数据集计算它的信息熵
 def calcShannonEnt(dataSet):
     numEntries = len(dataSet)
@@ -114,6 +113,7 @@ def store_tree(inputTree, filename):
     pickle.dump(inputTree, fw)
     fw.close()
 
+# 读取pickle模块存储的决策树
 def grab_tree(filename):
     import pickle
     fr = open(filename)

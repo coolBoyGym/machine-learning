@@ -10,12 +10,12 @@ Input:      inX: vector to compare to existing dataset (1xN)
 
 Output:     the most popular class label
 
-@author: gym
 """
 from numpy import *
 import operator
 from os import listdir
 
+# 构造一个包含四个样本的训练集
 def createDataSet():
     group = array([[1.0, 1.1], [1.0, 1.0], [0, 0], [0, 0.1]])
     labels = ['A', 'A', 'B', 'B']
@@ -35,6 +35,7 @@ def classify0(inX, dataSet, labels, k):
     sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
     return sortedClassCount[0][0]
 
+# 将包含约会网站数据的文件转化为矩阵 作为训练数据
 def file2matrix(filename):
     fr = open(filename)
     numberOfLines = len(fr.readlines())         # get the number of lines in the file
@@ -50,6 +51,7 @@ def file2matrix(filename):
         index += 1
     return returnMat, classLabelVector
 
+# 归一化特征值
 def autoNorm(dataSet):
     minVals = dataSet.min(0)
     maxVals = dataSet.max(0)
@@ -59,7 +61,6 @@ def autoNorm(dataSet):
     normDataSet = dataSet - tile(minVals, (m, 1))
     normDataSet = normDataSet / tile(ranges, (m, 1))   # element wise divide
     return normDataSet, ranges, minVals
-
 
 # 分类器针对约会网站的测试代码
 def datingClassTest():
@@ -76,8 +77,7 @@ def datingClassTest():
     print "the total error rate is: %f" % (errorCount/float(numTestVecs))
     print errorCount
 
-
-# 约会网站预测函数
+# 约会网站预测函数 对用户输入的某个样本进行归类
 def classify_person():
     resultList = ['not at all', 'in small doses', 'in large doses']
     percentTats = float(raw_input('percentage of time spent playing video games?'))
@@ -89,7 +89,7 @@ def classify_person():
     classifierResult = classify0((inArr-minVals)/ranges, normMat, datingLabels, 3)
     print 'You will probably like this person: ', resultList[classifierResult - 1]
 
-
+# 将数字图像(0/1序列)转化为测试向量
 def img2vector(filename):
     returnVect = zeros((1, 1024))
     fr = open(filename)

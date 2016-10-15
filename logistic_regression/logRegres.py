@@ -38,7 +38,7 @@ def stocGradAscent0(dataMatrix, classLabels):
     alpha = 0.01
     weights = ones(n)   # initialize to all ones
     for i in range(m):
-        h = sigmoid(sum(dataMatrix[i]*weights))
+        h = sigmoid(sum(dataMatrix[i] * weights))
         error = classLabels[i] - h
         weights = weights + alpha * error * dataMatrix[i]
     return weights
@@ -82,7 +82,7 @@ def plotBestFit(weights):
     ax.scatter(xcord1, ycord1, s=30, c='red', marker='s')  # 将label值为0的点画出来
     ax.scatter(xcord2, ycord2, s=30, c='green')            # 将label值为1的点画出来
     x = arange(-3.0, 3.0, 0.1)
-    y = (-weights[0]-weights[1]*x) / weights[2]  # 画出最佳拟合曲线 曲线上的点满足方程:W0X0+W1X1+W2X2=0
+    y = (-weights[0] - weights[1] * x) / weights[2]  # 画出最佳拟合曲线 曲线上的点满足方程:W0X0+W1X1+W2X2=0
     ax.plot(x, y)
     plt.xlabel('X1')
     plt.ylabel('X2')
@@ -97,7 +97,7 @@ def classifyVector(inX, weights):
         return 0.0
 
 
-# 自包含的测试函数
+# 自包含的测试函数 从疝气病症预测病马的死亡率
 def colicTest():
     frTrain = open('horseColicTraining.txt')
     frTest = open('horseColicTest.txt')
