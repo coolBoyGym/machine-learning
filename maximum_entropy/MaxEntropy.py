@@ -1,4 +1,7 @@
 # coding=utf-8
+"""
+基于GIS优化方案的最大熵模型
+"""
 import sys
 import math
 from collections import defaultdict
